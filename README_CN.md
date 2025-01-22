@@ -1,5 +1,7 @@
 # 播放速度与有声书进度计算器
 
+[English](README.md) | [简体中文](README_CN.md)
+
 一个现代化、用户友好的网络应用，帮助用户计算媒体播放的调整时长和追踪有声书阅读进度。使用React和TypeScript构建，具有清晰和响应式的设计。
 
 ![版本](https://img.shields.io/badge/version-1.0.0-blue.svg)

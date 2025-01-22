@@ -1,5 +1,7 @@
 # Playback Speed & Audiobook Progress Calculator
 
+[English](README.md) | [简体中文](README_CN.md)
+
 A modern, user-friendly web application that helps users calculate adjusted durations for media playback and track audiobook progress. Built with React and TypeScript, featuring a clean and responsive design.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
