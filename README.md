@@ -55,6 +55,82 @@ npm run dev
 
 The application will be available at `http://localhost:5173` (or another port if 5173 is in use).
 
+## 🚀 Deployment
+
+This is a static web application that can be deployed to various platforms. Here are some deployment options:
+
+### Build for Production
+
+First, create a production build:
+```bash
+npm run build
+```
+This will create a `dist` directory with optimized production files.
+
+### Deployment Options
+
+#### 1. GitHub Pages
+1. Update `vite.config.ts`:
+```typescript
+export default defineConfig({
+  base: '/Playback-Speed-Calculator/', // Replace with your repository name
+  // ... other config
+})
+```
+2. Create `.github/workflows/deploy.yml`:
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: dist
+```
+
+#### 2. Netlify
+1. Sign up for a Netlify account
+2. Connect your GitHub repository
+3. Configure build settings:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+4. Click "Deploy site"
+
+#### 3. Vercel
+1. Sign up for a Vercel account
+2. Import your GitHub repository
+3. The build settings will be auto-detected
+4. Click "Deploy"
+
+#### 4. Static Web Hosting
+Upload the contents of the `dist` directory to any static web hosting service:
+- Amazon S3 + CloudFront
+- Azure Static Web Apps
+- Google Cloud Storage
+- Any web hosting supporting static files
+
+### Environment Variables (if needed)
+Create a `.env` file in the root directory:
+```env
+VITE_APP_TITLE=Playback Speed Calculator
+VITE_APP_BASE_URL=https://your-domain.com
+```
+
+For production, set these variables in your hosting platform's environment settings.
+
 ## 💻 Usage
 
 ### Playback Speed Calculator

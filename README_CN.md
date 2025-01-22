@@ -55,6 +55,82 @@ npm run dev
 
 应用将在 `http://localhost:5173` 运行（如果5173端口被占用，将使用其他端口）。
 
+## 🚀 部署说明
+
+这是一个静态网页应用，可以部署到多个平台。以下是部署选项：
+
+### 生产环境构建
+
+首先，创建生产环境构建：
+```bash
+npm run build
+```
+这将在`dist`目录中生成优化后的生产文件。
+
+### 部署选项
+
+#### 1. GitHub Pages
+1. 更新`vite.config.ts`：
+```typescript
+export default defineConfig({
+  base: '/Playback-Speed-Calculator/', // 替换为你的仓库名
+  // ... 其他配置
+})
+```
+2. 创建`.github/workflows/deploy.yml`：
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: dist
+```
+
+#### 2. Netlify
+1. 注册Netlify账号
+2. 连接你的GitHub仓库
+3. 配置构建设置：
+   - 构建命令：`npm run build`
+   - 发布目录：`dist`
+4. 点击"Deploy site"部署
+
+#### 3. Vercel
+1. 注册Vercel账号
+2. 导入你的GitHub仓库
+3. 构建设置将被自动检测
+4. 点击"Deploy"部署
+
+#### 4. 静态网页托管
+将`dist`目录的内容上传到任何静态网页托管服务：
+- Amazon S3 + CloudFront
+- Azure Static Web Apps
+- Google Cloud Storage
+- 任何支持静态文件的网页托管服务
+
+### 环境变量（如需要）
+在根目录创建`.env`文件：
+```env
+VITE_APP_TITLE=Playback Speed Calculator
+VITE_APP_BASE_URL=https://your-domain.com
+```
+
+对于生产环境，在你的托管平台的环境设置中设置这些变量。
+
 ## 💻 使用指南
 
 ### 播放速度计算器
